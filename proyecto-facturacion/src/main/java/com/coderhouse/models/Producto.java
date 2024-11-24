@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,17 +19,22 @@ import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "Productos")
+@Schema(description = "Modelo de Productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID único del producto", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
     
+    @Schema(description = "Nombre del producto", example = "Pan",requiredMode = Schema.RequiredMode.REQUIRED)
     @Column(nullable = false)
     private String nombre;
     
+    @Schema(description = "Precio del producto", example = "15.50")
     private Double precio;
-    
+
+    @Schema(description = "Cantidad disponible del producto en el inventario",requiredMode = Schema.RequiredMode.REQUIRED,example = "20")
     private Integer stock;
     
     @ManyToMany(fetch = FetchType.LAZY)
@@ -38,6 +44,7 @@ public class Producto {
         inverseJoinColumns = @JoinColumn(name = "cliente_id")
     )
     @JsonIgnore
+    @Schema(description = "Lista de clientes que han comprado este producto",requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Cliente> clientes = new ArrayList<>();
     
    

@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "64e29ee2-e086-4067-951e-d8b2f48e0fa9",
+		"name": "Ventas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32263502"
+	},
+	"item": [
+		{
+			"name": "Buscar Venta por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ventas/4\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas",
+						"4\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Ventas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clienteId\":10,\r\n    \"productosIds\":[3,4]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ventas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Venta por su Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ventas/1\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas",
+						"1\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Venta por su id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ventas/1\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas",
+						"1\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar a todas las ventas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ventas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,12 @@ import com.coderhouse.services.ClienteService;
 import com.coderhouse.services.ProductoService;
 import com.coderhouse.services.VentaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 @RestController
 @RequestMapping("/api/ventas")
@@ -36,8 +43,16 @@ public class VentaController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	
+	@Operation(summary = "Obtener la Lista de todos los Clientes")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Lista de clientes obtenida correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 
-	@GetMapping
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Venta>> getAllVentas() {
 		try {
 			List<Venta> ventas = ventaService.findAll();
@@ -47,7 +62,13 @@ public class VentaController {
 		}
 	}
 
-	@GetMapping("/{id}")
+	
+	@Operation(summary = "Obtener venta por ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Venta encontrada correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "404", description = "Venta no encontrada", content = @Content) })
+	@GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Venta> getVentaById(@PathVariable Long id) {
 		try {
 			Venta venta = ventaService.getVentaById(id);
@@ -59,7 +80,7 @@ public class VentaController {
 		}
 	}
 	
-	@PostMapping
+	@PostMapping( consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Venta> createVenta(@RequestBody VentaDTO ventaDTO) {
 		 try {
 		        
@@ -79,7 +100,13 @@ public class VentaController {
 		    }
 		}
 	
-	@PutMapping("/{id}")
+	
+	@Operation(summary = "Editar una venta existente")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Venta editada correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "404", description = "Venta no encontrada", content = @Content) })
+	@PutMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Venta> updateVenta(@PathVariable Long id, 
 			@RequestBody Venta categoriaDetails) {
 		try {
@@ -91,7 +118,13 @@ public class VentaController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
+	
+	
+	@Operation(summary = "Eliminar una venta existente")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Venta eliminada correctamente", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Venta no encontrada", content = @Content) })
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteVenta(@PathVariable Long id) {
 		try {
 			if (ventaService.existsById(id)) {

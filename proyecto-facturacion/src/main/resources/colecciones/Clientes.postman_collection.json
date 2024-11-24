@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "3392fedb-d116-4f94-816b-5e3817866d0b",
+		"name": "Clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32263502"
+	},
+	"item": [
+		{
+			"name": "Listar a todos los clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar clientes por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/clientes/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Clientes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"nombre\": \"Fernanda López\",\r\n    \"direccion\": \"Paseo del Sol 102\",\r\n    \"email\": \"fernanda.lopez@example.com\",\r\n    \"telefono\": \"5557890123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Cliente por Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"nombre\": \"Brayan Ramirez\",\r\n\"direccion\": \"Calle San Martin\",\r\n\"telefono\": \"54292854529\",\r\n\"email\": \"brayanramirez@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/clientes/1\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes",
+						"1\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Cliente por Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/clientes/1\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes",
+						"1\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

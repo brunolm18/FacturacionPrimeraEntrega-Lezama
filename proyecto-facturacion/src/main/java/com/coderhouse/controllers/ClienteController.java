@@ -15,15 +15,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.coderhouse.models.Cliente;
 import com.coderhouse.services.ClienteService;
+import org.springframework.http.MediaType;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/api/clientes")
+@Tag(name = "Gestion de Clientes", description = "Endpoints para Gestionar Clientes")
 public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
 	
-	@GetMapping
+	@Operation(summary = "Obtener la Lista de todos los Clientes")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Lista de clientes obtenida correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Cliente>> getAllClientes(){
 		try {
 			List<Cliente> clientes = clienteService.getAllClientes();
@@ -34,7 +49,13 @@ public class ClienteController {
 		}
 	}
 	
-	@GetMapping("/{id}")
+	
+	@Operation(summary = "Obtener cliente por ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cliente encontrado correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "404", description = "Cliente no encontrado", content = @Content) })
+	@GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Long id){
 		try {
 			Cliente cliente = clienteService.findById(id);
@@ -47,7 +68,8 @@ public class ClienteController {
 		
 	}
 	
-	@PostMapping
+	
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
 		try {
 			Cliente createdCliente = clienteService.saveCliente(cliente);
@@ -58,7 +80,14 @@ public class ClienteController {
 		}
 	}
 
-	@PutMapping("/{id}")
+	
+	
+	@Operation(summary = "Editar un cliente existente")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cliente editado correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Cliente.class)) }),
+			@ApiResponse(responseCode = "404", description = "Cliente no encontrado", content = @Content) })
+	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Cliente> updateClienteById(@PathVariable Long id, @RequestBody Cliente clienteDetails) {
 		try {
 			Cliente updatedCliente = clienteService.updateCliente(id, clienteDetails);
@@ -70,7 +99,12 @@ public class ClienteController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
+	
+	@Operation(summary = "Eliminar un alumno existente")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Alumno eliminado correctamente", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Alumno no encontrado", content = @Content) })
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
 		try {
 			clienteService.deleteCliente(id);

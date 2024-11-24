@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "64eb2516-b939-4d59-b426-98ed3f495e99",
+		"name": "Comprobantes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32263502"
+	},
+	"item": [
+		{
+			"name": "Generar Comprobante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/comprobantes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"comprobantes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

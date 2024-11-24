@@ -46,7 +46,6 @@ public class ClienteService {
 		cliente.setNombre(clienteDetails.getNombre());
 		cliente.setDireccion(clienteDetails.getDireccion());
 		cliente.setTelefono(clienteDetails.getTelefono());
-		cliente.setCreatedAt(clienteDetails.getCreatedAt());
 		cliente.setEmail(clienteDetails.getEmail());
 		 
 		
